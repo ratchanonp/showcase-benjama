@@ -8,12 +8,25 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as ProfileIndexImport } from './routes/profile/index'
+import { Route as PortfolioIndexImport } from './routes/portfolio/index'
+import { Route as ProfileEditImport } from './routes/profile/edit'
+import { Route as ProfileAddPortfolioImport } from './routes/profile/add-portfolio'
+import { Route as ProfileAddAwardImport } from './routes/profile/add-award'
+import { Route as AuthSignUpImport } from './routes/auth/signUp'
+import { Route as AuthSignInImport } from './routes/auth/signIn'
 import { Route as AuthForgotPasswordImport } from './routes/auth/forgot-password'
+
+// Create Virtual Routes
+
+const AwardIndexLazyImport = createFileRoute('/award/')()
+const AboutIndexLazyImport = createFileRoute('/about/')()
 
 // Create/Update Routes
 
@@ -23,9 +36,57 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthIndexRoute = AuthIndexImport.update({
-  id: '/auth/',
-  path: '/auth/',
+const AwardIndexLazyRoute = AwardIndexLazyImport.update({
+  id: '/award/',
+  path: '/award/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/award/index.lazy').then((d) => d.Route))
+
+const AboutIndexLazyRoute = AboutIndexLazyImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about/index.lazy').then((d) => d.Route))
+
+const ProfileIndexRoute = ProfileIndexImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PortfolioIndexRoute = PortfolioIndexImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileEditRoute = ProfileEditImport.update({
+  id: '/profile/edit',
+  path: '/profile/edit',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileAddPortfolioRoute = ProfileAddPortfolioImport.update({
+  id: '/profile/add-portfolio',
+  path: '/profile/add-portfolio',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileAddAwardRoute = ProfileAddAwardImport.update({
+  id: '/profile/add-award',
+  path: '/profile/add-award',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignUpRoute = AuthSignUpImport.update({
+  id: '/auth/signUp',
+  path: '/auth/signUp',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignInRoute = AuthSignInImport.update({
+  id: '/auth/signIn',
+  path: '/auth/signIn',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +114,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordImport
       parentRoute: typeof rootRoute
     }
-    '/auth/': {
-      id: '/auth/'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthIndexImport
+    '/auth/signIn': {
+      id: '/auth/signIn'
+      path: '/auth/signIn'
+      fullPath: '/auth/signIn'
+      preLoaderRoute: typeof AuthSignInImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/signUp': {
+      id: '/auth/signUp'
+      path: '/auth/signUp'
+      fullPath: '/auth/signUp'
+      preLoaderRoute: typeof AuthSignUpImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/add-award': {
+      id: '/profile/add-award'
+      path: '/profile/add-award'
+      fullPath: '/profile/add-award'
+      preLoaderRoute: typeof ProfileAddAwardImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/add-portfolio': {
+      id: '/profile/add-portfolio'
+      path: '/profile/add-portfolio'
+      fullPath: '/profile/add-portfolio'
+      preLoaderRoute: typeof ProfileAddPortfolioImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/edit': {
+      id: '/profile/edit'
+      path: '/profile/edit'
+      fullPath: '/profile/edit'
+      preLoaderRoute: typeof ProfileEditImport
+      parentRoute: typeof rootRoute
+    }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/award/': {
+      id: '/award/'
+      path: '/award'
+      fullPath: '/award'
+      preLoaderRoute: typeof AwardIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +185,115 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
-  '/auth': typeof AuthIndexRoute
+  '/auth/signIn': typeof AuthSignInRoute
+  '/auth/signUp': typeof AuthSignUpRoute
+  '/profile/add-award': typeof ProfileAddAwardRoute
+  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
+  '/profile/edit': typeof ProfileEditRoute
+  '/portfolio': typeof PortfolioIndexRoute
+  '/profile': typeof ProfileIndexRoute
+  '/about': typeof AboutIndexLazyRoute
+  '/award': typeof AwardIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
-  '/auth': typeof AuthIndexRoute
+  '/auth/signIn': typeof AuthSignInRoute
+  '/auth/signUp': typeof AuthSignUpRoute
+  '/profile/add-award': typeof ProfileAddAwardRoute
+  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
+  '/profile/edit': typeof ProfileEditRoute
+  '/portfolio': typeof PortfolioIndexRoute
+  '/profile': typeof ProfileIndexRoute
+  '/about': typeof AboutIndexLazyRoute
+  '/award': typeof AwardIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
-  '/auth/': typeof AuthIndexRoute
+  '/auth/signIn': typeof AuthSignInRoute
+  '/auth/signUp': typeof AuthSignUpRoute
+  '/profile/add-award': typeof ProfileAddAwardRoute
+  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
+  '/profile/edit': typeof ProfileEditRoute
+  '/portfolio/': typeof PortfolioIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/about/': typeof AboutIndexLazyRoute
+  '/award/': typeof AwardIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/forgot-password' | '/auth'
+  fullPaths:
+    | '/'
+    | '/auth/forgot-password'
+    | '/auth/signIn'
+    | '/auth/signUp'
+    | '/profile/add-award'
+    | '/profile/add-portfolio'
+    | '/profile/edit'
+    | '/portfolio'
+    | '/profile'
+    | '/about'
+    | '/award'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/forgot-password' | '/auth'
-  id: '__root__' | '/' | '/auth/forgot-password' | '/auth/'
+  to:
+    | '/'
+    | '/auth/forgot-password'
+    | '/auth/signIn'
+    | '/auth/signUp'
+    | '/profile/add-award'
+    | '/profile/add-portfolio'
+    | '/profile/edit'
+    | '/portfolio'
+    | '/profile'
+    | '/about'
+    | '/award'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth/forgot-password'
+    | '/auth/signIn'
+    | '/auth/signUp'
+    | '/profile/add-award'
+    | '/profile/add-portfolio'
+    | '/profile/edit'
+    | '/portfolio/'
+    | '/profile/'
+    | '/about/'
+    | '/award/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
-  AuthIndexRoute: typeof AuthIndexRoute
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
+  ProfileAddAwardRoute: typeof ProfileAddAwardRoute
+  ProfileAddPortfolioRoute: typeof ProfileAddPortfolioRoute
+  ProfileEditRoute: typeof ProfileEditRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+  AboutIndexLazyRoute: typeof AboutIndexLazyRoute
+  AwardIndexLazyRoute: typeof AwardIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
-  AuthIndexRoute: AuthIndexRoute,
+  AuthSignInRoute: AuthSignInRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
+  ProfileAddAwardRoute: ProfileAddAwardRoute,
+  ProfileAddPortfolioRoute: ProfileAddPortfolioRoute,
+  ProfileEditRoute: ProfileEditRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+  AboutIndexLazyRoute: AboutIndexLazyRoute,
+  AwardIndexLazyRoute: AwardIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +308,15 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/auth/forgot-password",
-        "/auth/"
+        "/auth/signIn",
+        "/auth/signUp",
+        "/profile/add-award",
+        "/profile/add-portfolio",
+        "/profile/edit",
+        "/portfolio/",
+        "/profile/",
+        "/about/",
+        "/award/"
       ]
     },
     "/": {
@@ -126,8 +325,32 @@ export const routeTree = rootRoute
     "/auth/forgot-password": {
       "filePath": "auth/forgot-password.tsx"
     },
-    "/auth/": {
-      "filePath": "auth/index.tsx"
+    "/auth/signIn": {
+      "filePath": "auth/signIn.tsx"
+    },
+    "/auth/signUp": {
+      "filePath": "auth/signUp.tsx"
+    },
+    "/profile/add-award": {
+      "filePath": "profile/add-award.tsx"
+    },
+    "/profile/add-portfolio": {
+      "filePath": "profile/add-portfolio.tsx"
+    },
+    "/profile/edit": {
+      "filePath": "profile/edit.tsx"
+    },
+    "/portfolio/": {
+      "filePath": "portfolio/index.tsx"
+    },
+    "/profile/": {
+      "filePath": "profile/index.tsx"
+    },
+    "/about/": {
+      "filePath": "about/index.lazy.tsx"
+    },
+    "/award/": {
+      "filePath": "award/index.lazy.tsx"
     }
   }
 }

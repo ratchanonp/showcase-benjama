@@ -4,10 +4,8 @@ import {
   redirect,
 } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/auth/forgot-password")({
-  component: lazyRouteComponent(
-    () => import("@/modules/Auth/forgotPasswordPage")
-  ),
+export const Route = createFileRoute("/auth/signUp")({
+  component: lazyRouteComponent(() => import("@/modules/Auth/signUpPage")),
   beforeLoad: ({ context }) => {
     if (context.auth.isAuthenticated) {
       throw redirect({

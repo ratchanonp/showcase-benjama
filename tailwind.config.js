@@ -4,6 +4,9 @@ export default {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
+	fontFamily: {
+		sans: ['"Noto Sans Thai"', 'serif'],
+	},
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -83,7 +86,11 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+		fontFamily: {
+			'noto' : ['"Noto Sans Thai"', 'serif'],
+			'noto_looped' : ['"Noto Sans Thai Looped"', 'serif']
+		}
   	}
   },
   plugins: [tailwindcssAnimate],

@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/awardPage-DT7JQoUO.js","assets/index-Cv7PuvJE.js","assets/index-ChCZVdrG.css","assets/navbar-CKgiNdTi.js","assets/index-BIx2ormR.js","assets/awardCard-CH6FRk6C.js","assets/separator-BwzGn8mb.js","assets/index-BICUkeyL.js","assets/index-Bpc60013.js"])))=>i.map(i=>d[i]);
-import{c as o,l as e,_ as t}from"./index-Cv7PuvJE.js";const r=o("/award/")({component:e(()=>t(()=>import("./awardPage-DT7JQoUO.js"),__vite__mapDeps([0,1,2,3,4,5,6,7,8])))});export{r as Route};

@@ -1,7 +1,7 @@
 import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/portfolio/")({
+export const Route = createFileRoute("/category/$categoryId")({
   component: lazyRouteComponent(
-    () => import("@/modules/Portfolio/Portfolio.index.page")
+    () => import("@/modules/Category/CategoryPage")
   ),
 });

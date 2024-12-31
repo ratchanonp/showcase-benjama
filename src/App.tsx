@@ -1,7 +1,9 @@
 import { RouterProvider } from "@tanstack/react-router";
 import { useContext } from "react";
+import { Provider } from "react-redux";
 import { AuthContext, AuthProvider } from "./contexts/AuthContext";
 import { router } from "./router";
+import { store } from "./store/store";
 
 function InnerApp() {
   const auth = useContext(AuthContext);
@@ -19,7 +21,9 @@ function InnerApp() {
 export default function App() {
   return (
     <AuthProvider>
-      <InnerApp />
+      <Provider store={store}>
+        <InnerApp />
+      </Provider>
     </AuthProvider>
   );
 }

@@ -16,16 +16,21 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as PortfolioIndexImport } from './routes/portfolio/index'
+import { Route as PopularIndexImport } from './routes/popular/index'
+import { Route as CategoryIndexImport } from './routes/category/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as StoryStoryIdImport } from './routes/story/$storyId'
 import { Route as ProfileEditImport } from './routes/profile/edit'
 import { Route as ProfileAddPortfolioImport } from './routes/profile/add-portfolio'
 import { Route as ProfileAddAwardImport } from './routes/profile/add-award'
+import { Route as PortfolioPortfolioIdImport } from './routes/portfolio/$portfolioId'
+import { Route as CategoryCategoryIdImport } from './routes/category/$categoryId'
 import { Route as AuthSignUpImport } from './routes/auth/signUp'
 import { Route as AuthSignInImport } from './routes/auth/signIn'
 import { Route as AuthForgotPasswordImport } from './routes/auth/forgot-password'
 
 // Create Virtual Routes
 
-const AwardIndexLazyImport = createFileRoute('/award/')()
 const AboutIndexLazyImport = createFileRoute('/about/')()
 
 // Create/Update Routes
@@ -35,12 +40,6 @@ const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
-
-const AwardIndexLazyRoute = AwardIndexLazyImport.update({
-  id: '/award/',
-  path: '/award/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/award/index.lazy').then((d) => d.Route))
 
 const AboutIndexLazyRoute = AboutIndexLazyImport.update({
   id: '/about/',
@@ -60,6 +59,30 @@ const PortfolioIndexRoute = PortfolioIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const PopularIndexRoute = PopularIndexImport.update({
+  id: '/popular/',
+  path: '/popular/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CategoryIndexRoute = CategoryIndexImport.update({
+  id: '/category/',
+  path: '/category/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StoryStoryIdRoute = StoryStoryIdImport.update({
+  id: '/story/$storyId',
+  path: '/story/$storyId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ProfileEditRoute = ProfileEditImport.update({
   id: '/profile/edit',
   path: '/profile/edit',
@@ -75,6 +98,18 @@ const ProfileAddPortfolioRoute = ProfileAddPortfolioImport.update({
 const ProfileAddAwardRoute = ProfileAddAwardImport.update({
   id: '/profile/add-award',
   path: '/profile/add-award',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PortfolioPortfolioIdRoute = PortfolioPortfolioIdImport.update({
+  id: '/portfolio/$portfolioId',
+  path: '/portfolio/$portfolioId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CategoryCategoryIdRoute = CategoryCategoryIdImport.update({
+  id: '/category/$categoryId',
+  path: '/category/$categoryId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -128,6 +163,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignUpImport
       parentRoute: typeof rootRoute
     }
+    '/category/$categoryId': {
+      id: '/category/$categoryId'
+      path: '/category/$categoryId'
+      fullPath: '/category/$categoryId'
+      preLoaderRoute: typeof CategoryCategoryIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/portfolio/$portfolioId': {
+      id: '/portfolio/$portfolioId'
+      path: '/portfolio/$portfolioId'
+      fullPath: '/portfolio/$portfolioId'
+      preLoaderRoute: typeof PortfolioPortfolioIdImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/add-award': {
       id: '/profile/add-award'
       path: '/profile/add-award'
@@ -147,6 +196,34 @@ declare module '@tanstack/react-router' {
       path: '/profile/edit'
       fullPath: '/profile/edit'
       preLoaderRoute: typeof ProfileEditImport
+      parentRoute: typeof rootRoute
+    }
+    '/story/$storyId': {
+      id: '/story/$storyId'
+      path: '/story/$storyId'
+      fullPath: '/story/$storyId'
+      preLoaderRoute: typeof StoryStoryIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/category/': {
+      id: '/category/'
+      path: '/category'
+      fullPath: '/category'
+      preLoaderRoute: typeof CategoryIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/popular/': {
+      id: '/popular/'
+      path: '/popular'
+      fullPath: '/popular'
+      preLoaderRoute: typeof PopularIndexImport
       parentRoute: typeof rootRoute
     }
     '/portfolio/': {
@@ -170,13 +247,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/award/': {
-      id: '/award/'
-      path: '/award'
-      fullPath: '/award'
-      preLoaderRoute: typeof AwardIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -187,13 +257,18 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
   '/auth/signUp': typeof AuthSignUpRoute
+  '/category/$categoryId': typeof CategoryCategoryIdRoute
+  '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
   '/profile/add-award': typeof ProfileAddAwardRoute
   '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
+  '/story/$storyId': typeof StoryStoryIdRoute
+  '/admin': typeof AdminIndexRoute
+  '/category': typeof CategoryIndexRoute
+  '/popular': typeof PopularIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/about': typeof AboutIndexLazyRoute
-  '/award': typeof AwardIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -201,13 +276,18 @@ export interface FileRoutesByTo {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
   '/auth/signUp': typeof AuthSignUpRoute
+  '/category/$categoryId': typeof CategoryCategoryIdRoute
+  '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
   '/profile/add-award': typeof ProfileAddAwardRoute
   '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
+  '/story/$storyId': typeof StoryStoryIdRoute
+  '/admin': typeof AdminIndexRoute
+  '/category': typeof CategoryIndexRoute
+  '/popular': typeof PopularIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/about': typeof AboutIndexLazyRoute
-  '/award': typeof AwardIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -216,13 +296,18 @@ export interface FileRoutesById {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
   '/auth/signUp': typeof AuthSignUpRoute
+  '/category/$categoryId': typeof CategoryCategoryIdRoute
+  '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
   '/profile/add-award': typeof ProfileAddAwardRoute
   '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
+  '/story/$storyId': typeof StoryStoryIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/category/': typeof CategoryIndexRoute
+  '/popular/': typeof PopularIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/about/': typeof AboutIndexLazyRoute
-  '/award/': typeof AwardIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -232,39 +317,54 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/signIn'
     | '/auth/signUp'
+    | '/category/$categoryId'
+    | '/portfolio/$portfolioId'
     | '/profile/add-award'
     | '/profile/add-portfolio'
     | '/profile/edit'
+    | '/story/$storyId'
+    | '/admin'
+    | '/category'
+    | '/popular'
     | '/portfolio'
     | '/profile'
     | '/about'
-    | '/award'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/forgot-password'
     | '/auth/signIn'
     | '/auth/signUp'
+    | '/category/$categoryId'
+    | '/portfolio/$portfolioId'
     | '/profile/add-award'
     | '/profile/add-portfolio'
     | '/profile/edit'
+    | '/story/$storyId'
+    | '/admin'
+    | '/category'
+    | '/popular'
     | '/portfolio'
     | '/profile'
     | '/about'
-    | '/award'
   id:
     | '__root__'
     | '/'
     | '/auth/forgot-password'
     | '/auth/signIn'
     | '/auth/signUp'
+    | '/category/$categoryId'
+    | '/portfolio/$portfolioId'
     | '/profile/add-award'
     | '/profile/add-portfolio'
     | '/profile/edit'
+    | '/story/$storyId'
+    | '/admin/'
+    | '/category/'
+    | '/popular/'
     | '/portfolio/'
     | '/profile/'
     | '/about/'
-    | '/award/'
   fileRoutesById: FileRoutesById
 }
 
@@ -273,13 +373,18 @@ export interface RootRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  CategoryCategoryIdRoute: typeof CategoryCategoryIdRoute
+  PortfolioPortfolioIdRoute: typeof PortfolioPortfolioIdRoute
   ProfileAddAwardRoute: typeof ProfileAddAwardRoute
   ProfileAddPortfolioRoute: typeof ProfileAddPortfolioRoute
   ProfileEditRoute: typeof ProfileEditRoute
+  StoryStoryIdRoute: typeof StoryStoryIdRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  CategoryIndexRoute: typeof CategoryIndexRoute
+  PopularIndexRoute: typeof PopularIndexRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   AboutIndexLazyRoute: typeof AboutIndexLazyRoute
-  AwardIndexLazyRoute: typeof AwardIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -287,13 +392,18 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  CategoryCategoryIdRoute: CategoryCategoryIdRoute,
+  PortfolioPortfolioIdRoute: PortfolioPortfolioIdRoute,
   ProfileAddAwardRoute: ProfileAddAwardRoute,
   ProfileAddPortfolioRoute: ProfileAddPortfolioRoute,
   ProfileEditRoute: ProfileEditRoute,
+  StoryStoryIdRoute: StoryStoryIdRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  CategoryIndexRoute: CategoryIndexRoute,
+  PopularIndexRoute: PopularIndexRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   AboutIndexLazyRoute: AboutIndexLazyRoute,
-  AwardIndexLazyRoute: AwardIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -310,13 +420,18 @@ export const routeTree = rootRoute
         "/auth/forgot-password",
         "/auth/signIn",
         "/auth/signUp",
+        "/category/$categoryId",
+        "/portfolio/$portfolioId",
         "/profile/add-award",
         "/profile/add-portfolio",
         "/profile/edit",
+        "/story/$storyId",
+        "/admin/",
+        "/category/",
+        "/popular/",
         "/portfolio/",
         "/profile/",
-        "/about/",
-        "/award/"
+        "/about/"
       ]
     },
     "/": {
@@ -331,6 +446,12 @@ export const routeTree = rootRoute
     "/auth/signUp": {
       "filePath": "auth/signUp.tsx"
     },
+    "/category/$categoryId": {
+      "filePath": "category/$categoryId.tsx"
+    },
+    "/portfolio/$portfolioId": {
+      "filePath": "portfolio/$portfolioId.tsx"
+    },
     "/profile/add-award": {
       "filePath": "profile/add-award.tsx"
     },
@@ -340,6 +461,18 @@ export const routeTree = rootRoute
     "/profile/edit": {
       "filePath": "profile/edit.tsx"
     },
+    "/story/$storyId": {
+      "filePath": "story/$storyId.tsx"
+    },
+    "/admin/": {
+      "filePath": "admin/index.tsx"
+    },
+    "/category/": {
+      "filePath": "category/index.tsx"
+    },
+    "/popular/": {
+      "filePath": "popular/index.tsx"
+    },
     "/portfolio/": {
       "filePath": "portfolio/index.tsx"
     },
@@ -348,9 +481,6 @@ export const routeTree = rootRoute
     },
     "/about/": {
       "filePath": "about/index.lazy.tsx"
-    },
-    "/award/": {
-      "filePath": "award/index.lazy.tsx"
     }
   }
 }

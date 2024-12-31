@@ -2,7 +2,13 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Link, useRouter } from "@tanstack/react-router";
-import { BackpackIcon, MenuIcon, UserCircle2Icon, XIcon } from "lucide-react";
+import {
+  BackpackIcon,
+  LogOutIcon,
+  MenuIcon,
+  UserCircle2Icon,
+  XIcon,
+} from "lucide-react";
 import { useContext } from "react";
 import { Button } from "./ui/button";
 import {
@@ -13,14 +19,17 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "./ui/drawer";
-import { ListItem } from "./ui/ListItem";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 
@@ -45,7 +54,7 @@ export default function Navbar() {
 }
 
 export function DesktopNav() {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, logout, user } = useContext(AuthContext);
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -57,53 +66,53 @@ export function DesktopNav() {
     <div className="list-none hidden sm:flex">
       <NavigationMenu>
         <NavigationMenuItem>
-          <Link to="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              หน้าแรก
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/">หน้าแรก</Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>ผลงาน</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[300px] list-none">
-                <ListItem title="ผลงานวิชาการ" href="/award">
-                  ผลงานด้านวิชาการ การเรียนดี ฝีมือเก่ง
-                </ListItem>
-                <ListItem title="ผลงานกีฬา" href="/award">
-                  ผลงานด้านกีฬา กีฬาเยี่ยม
-                </ListItem>
-                <ListItem title="Portfolio" href="/portfolio">
-                  Portfolio ของศิษย์เก่า
-                </ListItem>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/category">ประเภท</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link
+              to="/popular"
+              search={{
+                rankingCategory: "all",
+              }}
+            >
+              ยอดนิยม
+            </Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
         <NavigationMenuItem className="mr-2">
-          <Link to="/about">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              เกี่ยวกับ
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/about">เกี่ยวกับ</Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         {isAuthenticated ? (
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>
-                <UserCircle2Icon className="w-6 h-6" />
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[300px] list-none">
-                  <ListItem title="โปรไฟล์ของฉัน" href="/profile">
-                    ดูโปรไฟล์ของฉัน
-                  </ListItem>
-                </ul>
-                <Button onClick={handleSignOut} className="m-2.5">
-                  ออกจากระบบ
-                </Button>
-              </NavigationMenuContent>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    <UserCircle2Icon className="w-6 h-6" />
+                    {user?.displayName}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48">
+                  <DropdownMenuItem>
+                    <UserCircle2Icon className="w-6 h-6" />
+                    <Link to="/profile">โปรไฟล์</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOutIcon className="w-6 h-6" />
+                    ออกจากระบบ
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </NavigationMenuItem>
           </NavigationMenuList>
         ) : (
@@ -140,7 +149,7 @@ export function MobileNav() {
   const { isAuthenticated } = useContext(AuthContext);
   return (
     <Drawer>
-      <DrawerTrigger>
+      <DrawerTrigger asChild>
         <Button variant="outline">
           <MenuIcon className="w-6 h-6" />
         </Button>
@@ -167,19 +176,18 @@ export function MobileNav() {
             <Link to="/">หน้าแรก</Link>
           </li>
           <li>
-            <Link to="/award">ผลงาน</Link>
+            <Link to="/category">ประเภท</Link>
           </li>
-          <ul>
-            <li>
-              <Link to="/award">ผลงานวิชาการ</Link>
-            </li>
-            <li>
-              <Link to="/award">ผลงานกีฬา</Link>
-            </li>
-            <li>
-              <Link to="/portfolio">Portfolio</Link>
-            </li>
-          </ul>
+          <li>
+            <Link
+              to="/popular"
+              search={{
+                rankingCategory: "all",
+              }}
+            >
+              ยอดนิยม
+            </Link>
+          </li>
           <li>
             <Link to="/about">เกี่ยวกับ</Link>
           </li>
@@ -193,12 +201,12 @@ export function MobileNav() {
               <Button className="w-full">เข้าสู่ระบบ</Button>
             </div>
           ) : (
-            <Link to="/profile">
-              <Button className="w-full flex items-center">
+            <Button className="w-full flex items-center" asChild>
+              <Link to="/profile">
                 {" "}
                 <UserCircle2Icon className="w-6 h-6" /> โปรไฟล์
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           )}
         </DrawerFooter>
       </DrawerContent>

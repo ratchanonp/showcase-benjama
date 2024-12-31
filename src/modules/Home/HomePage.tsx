@@ -25,7 +25,7 @@ export default function HomePage() {
                 และติดตามผลงานทางด้านต่าง ๆ ของนักเรียนโรงเรียนเบญจมราชูทิศ
               </p>
               <div className="flex space-x-2.5">
-                <Link to="/award">
+                <Link to="/category">
                   <Button size="lg" variant="outline">
                     ดูผลงาน
                   </Button>

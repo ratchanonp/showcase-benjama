@@ -15,5 +15,5 @@ export const Route = createFileRoute("/profile/")({
       });
     }
   },
-  component: lazyRouteComponent(() => import("@/modules/Profile/profilePage")),
+  component: lazyRouteComponent(() => import("@/modules/Profile/ProfilePage")),
 });

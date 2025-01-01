@@ -15,8 +15,10 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
 import {
@@ -38,7 +40,7 @@ export default function Navbar() {
   return (
     <nav className=" py-4  border-b-neutral-200 border-b">
       <div className=" max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div className="flex items-end">
+        <Link to="/" className="flex items-end">
           <BackpackIcon className="w-10 h-10 text-red-500" />
           <h1 className="text-xl font-black text-left ml-2.5 text-red-500 leading-4">
             WEBBEN <br />
@@ -46,7 +48,7 @@ export default function Navbar() {
               Benjamarachutit
             </span>
           </h1>
-        </div>
+        </Link>
         {isMobile ? <MobileNav /> : <DesktopNav />}
       </div>
     </nav>
@@ -118,25 +120,23 @@ export function DesktopNav() {
         ) : (
           <>
             <NavigationMenuItem>
-              <Link to="/auth/signUp">
-                <NavigationMenuLink
-                  className={cn(navigationMenuTriggerStyle(), "border")}
-                >
-                  สร้างบัญชี
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                className={cn(navigationMenuTriggerStyle(), "border")}
+                asChild
+              >
+                <Link to="/auth/signUp">สร้างบัญชี</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="ml-2">
-              <Link to="/auth/signIn">
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-red-600 text-white"
-                  )}
-                >
-                  เข้าสู่ระบบ
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "bg-red-600 text-white"
+                )}
+                asChild
+              >
+                <Link to="/auth/signIn">เข้าสู่ระบบ</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </>
         )}
@@ -146,7 +146,12 @@ export function DesktopNav() {
 }
 
 export function MobileNav() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, logout } = useContext(AuthContext);
+
+  async function handleSignOut() {
+    await logout();
+  }
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -157,29 +162,37 @@ export function MobileNav() {
       <DrawerContent>
         <DrawerHeader>
           <div className="flex justify-between items-center">
-            <div className="flex">
+            <DrawerTitle className="text-xl font-black text-left text-red-500 leading-5 flex">
               <BackpackIcon className="w-10 h-10 text-red-500" />
-              <h1 className="text-xl font-black text-left ml-2.5 text-red-500 leading-5">
+              <span className="ml-2">
                 <span className=" text-xs font-medium text-neutral-800">
                   Benjamarachutit
                 </span>
                 <br /> Showcase
-              </h1>
-            </div>
+              </span>
+            </DrawerTitle>
             <DrawerClose className="border aspect-square h-full flex items-center justify-center rounded-md">
               <XIcon className="w-6 h-6" />
             </DrawerClose>
           </div>
+          <DrawerDescription className="text-xs text-neutral-600 text-left">
+            เมนูหลัก
+          </DrawerDescription>
         </DrawerHeader>
-        <ul className="p-5">
+        <ul className="px-4 w-full flex flex-col">
           <li>
-            <Link to="/">หน้าแรก</Link>
+            <Link className=" hover:bg-neutral-100 w-full flex" to="/">
+              หน้าแรก
+            </Link>
           </li>
           <li>
-            <Link to="/category">ประเภท</Link>
+            <Link className=" hover:bg-neutral-100 w-full flex" to="/category">
+              ประเภท
+            </Link>
           </li>
           <li>
             <Link
+              className=" hover:bg-neutral-100 w-full flex"
               to="/popular"
               search={{
                 rankingCategory: "all",
@@ -189,24 +202,38 @@ export function MobileNav() {
             </Link>
           </li>
           <li>
-            <Link to="/about">เกี่ยวกับ</Link>
+            <Link className=" hover:bg-neutral-100 w-full flex" to="/about">
+              เกี่ยวกับ
+            </Link>
           </li>
         </ul>
         <DrawerFooter>
           {!isAuthenticated ? (
             <div className="grid grid-cols-2 gap-x-2">
-              <Button variant="outline" className="w-full">
-                สร้างบัญชี
+              <Button variant="outline" className="w-full" asChild>
+                <Link to="/auth/signUp">สร้างบัญชี</Link>
               </Button>
-              <Button className="w-full">เข้าสู่ระบบ</Button>
+              <Button className="w-full" asChild>
+                <Link to="/auth/signIn">เข้าสู่ระบบ</Link>
+              </Button>
             </div>
           ) : (
-            <Button className="w-full flex items-center" asChild>
-              <Link to="/profile">
-                {" "}
-                <UserCircle2Icon className="w-6 h-6" /> โปรไฟล์
-              </Link>
-            </Button>
+            <div className="grid grid-cols-2 gap-x-2">
+              <Button className="w-full flex" asChild>
+                <Link to="/profile" className="flex justify-center  w-full">
+                  <UserCircle2Icon className="w-6 h-6" />
+                  <p>Profile</p>
+                </Link>
+              </Button>
+              <Button
+                className="w-full"
+                onClick={handleSignOut}
+                variant="secondary"
+              >
+                <LogOutIcon className="w-6 h-6" />
+                <p>Logout</p>
+              </Button>
+            </div>
           )}
         </DrawerFooter>
       </DrawerContent>

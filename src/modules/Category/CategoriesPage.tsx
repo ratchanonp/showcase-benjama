@@ -20,7 +20,7 @@ export default function CategoriesPage() {
       <main className="bg-neutral-100">
         <div
           id="wrapper"
-          className="max-w-screen-xl mx-auto px-8 py-8 space-y-4"
+          className="max-w-screen-xl mx-auto p-4 md:p-8 space-y-4 min-h-[calc(100svh-133px)]"
         >
           <div className="flex justify-between items-center">
             <h1 className="font-semibold">
@@ -38,7 +38,9 @@ export default function CategoriesPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {!data || data.length === 0 ? (
-              <div className="col-span-full text-center">ไม่มีข้อมูล</div>
+              <div className="col-span-full row-span-full text-center min-h-20 flex items-center justify-center bg-white rounded-lg ">
+                ไม่มีข้อมูล
+              </div>
             ) : (
               data.map((story) => <StoryCard key={story.id} story={story} />)
             )}

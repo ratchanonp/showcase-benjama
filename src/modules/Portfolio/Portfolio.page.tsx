@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import PortfolioGrid from "./components/portfolioGrid";
+import PortfolioGrid from "./components/PortfolioGrid";
 
 export default function Portfolio() {
   return (

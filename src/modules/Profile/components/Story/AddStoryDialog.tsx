@@ -7,8 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { AddStoryDialogProvider } from "@/modules/Profile/components/Story/contexts/AddStoryDialogContext";
 import { useState } from "react";
-import { AddStoryDialogProvider } from "../contexts/AddStoryDialogContext";
 import AddStoryForm from "./AddStoryForm";
 
 export default function AddStoryDialog() {

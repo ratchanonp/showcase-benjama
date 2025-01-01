@@ -101,7 +101,7 @@ export default function AuthStoryCard(props: Props) {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              className={`text-pink-500 rounded-full bg-neutral-50 flex items-center justify-center w-fit mt-auto ${
+              className={`text-pink-500 rounded-full bg-neutral-50 flex items-center justify-center w-fit h-fit py-1 gap-1 mt-auto text-xs ${
                 isLiked
                   ? "bg-pink-500 text-white hover:bg-pink-600 hover:text-white"
                   : "text-neutral-500 hover:bg-neutral-100 hover:text-pink-500"
@@ -109,19 +109,24 @@ export default function AuthStoryCard(props: Props) {
               onClick={handleLike}
               disabled={likeLoading || unlikeLoading}
               variant="ghost"
+              size={"sm"}
             >
               {likeLoading || unlikeLoading ? (
                 <>
-                  <Loader2Icon className="w-4 h-4 animate-spin" />
+                  <Loader2Icon className="w-2 h-2 md:w-4 md:h-4 animate-spin" />
                   <p>Processing</p>
                 </>
               ) : isLiked ? (
                 <>
-                  <Heart className="w-4 h-4 " fill="currentColor" /> Like
+                  <Heart
+                    className="w-2 h-2 md:w-4 md:h-4 "
+                    fill="currentColor"
+                  />{" "}
+                  Like
                 </>
               ) : (
                 <>
-                  <Heart className="w-4 h-4" /> Like
+                  <Heart className="w-2 h-2 md:w-4 md:h-4" /> Like
                 </>
               )}
             </Button>

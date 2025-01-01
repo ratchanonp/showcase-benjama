@@ -38,7 +38,11 @@ export default function CategoryPage() {
             </DropdownMenu>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {data?.map((story, index) => <StoryCard story={story} />)}
+            {!data || data.length === 0 ? (
+              <div className="col-span-full text-center">ไม่มีข้อมูล</div>
+            ) : (
+              data.map((story) => <StoryCard key={story.id} story={story} />)
+            )}
           </div>
         </div>
       </main>

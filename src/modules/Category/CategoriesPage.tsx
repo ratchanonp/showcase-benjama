@@ -31,15 +31,17 @@ export default function CategoriesPage() {
               }
             </h1>
             <DropdownMenu>
-              <DropdownMenuTrigger>
+              <DropdownMenuTrigger asChild>
                 <Button variant="ghost">เรียงตาม</Button>
               </DropdownMenuTrigger>
             </DropdownMenu>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {data?.map((story, index) => (
-              <StoryCard key={story.id} story={story} />
-            ))}
+            {!data || data.length === 0 ? (
+              <div className="col-span-full text-center">ไม่มีข้อมูล</div>
+            ) : (
+              data.map((story) => <StoryCard key={story.id} story={story} />)
+            )}
           </div>
         </div>
       </main>

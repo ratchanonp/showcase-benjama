@@ -21,12 +21,12 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { AddStoryPayload } from "../../../features/story/storyFirebase";
+import { AddStoryPayload } from "../../../../features/story/storyFirebase";
 import {
   useAddStoryMutation,
   useSetFeatureImageMutation,
-} from "../../../features/story/storySlice";
-import { AddStoryDialogContext } from "../contexts/AddStoryDialogContext";
+} from "../../../../features/story/storySlice";
+import { AddStoryDialogContext } from "./contexts/AddStoryDialogContext";
 
 const addStoryFormSchema = z.object({
   title: z

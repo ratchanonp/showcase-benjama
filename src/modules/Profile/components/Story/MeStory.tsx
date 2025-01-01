@@ -1,7 +1,7 @@
 import AuthStoryCard from "@/components/StoryCard/AuthStoryCard";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useGetStoriesByUserIdQuery } from "@/features/story/storySlice";
 import { useContext } from "react";
-import { useGetStoriesByUserIdQuery } from "../../../features/story/storySlice";
 
 export default function MeStory() {
   const { user } = useContext(AuthContext);

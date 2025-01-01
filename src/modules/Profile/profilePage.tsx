@@ -1,6 +1,4 @@
 import Navbar from "@/components/navbar";
-import { Button } from "@/components/ui/button";
-import { Link } from "@tanstack/react-router";
 import AddStoryDialog from "./components/AddStoryDialog";
 import MeStory from "./components/MeStory";
 
@@ -17,9 +15,6 @@ export default function ProfilePage() {
         </section>
         <div className="flex space-x-2.5 max-w-screen-xl mx-auto px-5">
           <AddStoryDialog />
-          <Link to="/profile/add-award">
-            <Button>เพิ่ม Portfolio</Button>
-          </Link>
         </div>
         <section className="space-y-2.5 bg-neutral-50">
           <div className="max-w-screen-xl mx-auto px-5 py-5">

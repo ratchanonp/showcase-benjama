@@ -10,16 +10,16 @@ export default function HomePage() {
       <main>
         <div className="w-full relative min-h-[calc(100svh-73.5px)] bg-[url('/Rama5.png')] bg-cover bg-top">
           <div className="absolute bottom-0 left-0 w-screen ">
-            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-10">
+            <div className="max-w-screen-xl mx-auto p-6 space-y-10">
               <BackpackIcon className="w-20 h-20 md:w-32 md:h-32 text-white" />
               <h1 className="text-2xl  text-white drop-shadow-lg">
-                <span className="uppercase text-7xl md:text-8xl font-black">
+                <span className="uppercase text-5xl md:text-8xl font-black">
                   WEBBEN
                 </span>
                 <br />
                 Benjamarachutit
               </h1>
-              <p className="text-white text-xl font-light">
+              <p className="text-white md:text-xl font-light">
                 แพลตฟอร์มเผยแพร่ผลงานเพื่อสร้างแรงบันดาลใจ
                 <br />
                 และติดตามผลงานทางด้านต่าง ๆ ของนักเรียนโรงเรียนเบญจมราชูทิศ
@@ -30,7 +30,7 @@ export default function HomePage() {
                     ดูผลงาน
                   </Button>
                 </Link>
-                <Link to="/auth/signIn">
+                <Link to="/profile">
                   <Button
                     size="lg"
                     variant="default"

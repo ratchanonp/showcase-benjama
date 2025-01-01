@@ -21,8 +21,6 @@ import { Route as CategoryIndexImport } from './routes/category/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as StoryStoryIdImport } from './routes/story/$storyId'
 import { Route as ProfileEditImport } from './routes/profile/edit'
-import { Route as ProfileAddPortfolioImport } from './routes/profile/add-portfolio'
-import { Route as ProfileAddAwardImport } from './routes/profile/add-award'
 import { Route as PortfolioPortfolioIdImport } from './routes/portfolio/$portfolioId'
 import { Route as CategoryCategoryIdImport } from './routes/category/$categoryId'
 import { Route as AuthSignUpImport } from './routes/auth/signUp'
@@ -86,18 +84,6 @@ const StoryStoryIdRoute = StoryStoryIdImport.update({
 const ProfileEditRoute = ProfileEditImport.update({
   id: '/profile/edit',
   path: '/profile/edit',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileAddPortfolioRoute = ProfileAddPortfolioImport.update({
-  id: '/profile/add-portfolio',
-  path: '/profile/add-portfolio',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileAddAwardRoute = ProfileAddAwardImport.update({
-  id: '/profile/add-award',
-  path: '/profile/add-award',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -177,20 +163,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioPortfolioIdImport
       parentRoute: typeof rootRoute
     }
-    '/profile/add-award': {
-      id: '/profile/add-award'
-      path: '/profile/add-award'
-      fullPath: '/profile/add-award'
-      preLoaderRoute: typeof ProfileAddAwardImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile/add-portfolio': {
-      id: '/profile/add-portfolio'
-      path: '/profile/add-portfolio'
-      fullPath: '/profile/add-portfolio'
-      preLoaderRoute: typeof ProfileAddPortfolioImport
-      parentRoute: typeof rootRoute
-    }
     '/profile/edit': {
       id: '/profile/edit'
       path: '/profile/edit'
@@ -259,8 +231,6 @@ export interface FileRoutesByFullPath {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/add-award': typeof ProfileAddAwardRoute
-  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin': typeof AdminIndexRoute
@@ -278,8 +248,6 @@ export interface FileRoutesByTo {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/add-award': typeof ProfileAddAwardRoute
-  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin': typeof AdminIndexRoute
@@ -298,8 +266,6 @@ export interface FileRoutesById {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/add-award': typeof ProfileAddAwardRoute
-  '/profile/add-portfolio': typeof ProfileAddPortfolioRoute
   '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin/': typeof AdminIndexRoute
@@ -319,8 +285,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/add-award'
-    | '/profile/add-portfolio'
     | '/profile/edit'
     | '/story/$storyId'
     | '/admin'
@@ -337,8 +301,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/add-award'
-    | '/profile/add-portfolio'
     | '/profile/edit'
     | '/story/$storyId'
     | '/admin'
@@ -355,8 +317,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/add-award'
-    | '/profile/add-portfolio'
     | '/profile/edit'
     | '/story/$storyId'
     | '/admin/'
@@ -375,8 +335,6 @@ export interface RootRouteChildren {
   AuthSignUpRoute: typeof AuthSignUpRoute
   CategoryCategoryIdRoute: typeof CategoryCategoryIdRoute
   PortfolioPortfolioIdRoute: typeof PortfolioPortfolioIdRoute
-  ProfileAddAwardRoute: typeof ProfileAddAwardRoute
-  ProfileAddPortfolioRoute: typeof ProfileAddPortfolioRoute
   ProfileEditRoute: typeof ProfileEditRoute
   StoryStoryIdRoute: typeof StoryStoryIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -394,8 +352,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignUpRoute: AuthSignUpRoute,
   CategoryCategoryIdRoute: CategoryCategoryIdRoute,
   PortfolioPortfolioIdRoute: PortfolioPortfolioIdRoute,
-  ProfileAddAwardRoute: ProfileAddAwardRoute,
-  ProfileAddPortfolioRoute: ProfileAddPortfolioRoute,
   ProfileEditRoute: ProfileEditRoute,
   StoryStoryIdRoute: StoryStoryIdRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -422,8 +378,6 @@ export const routeTree = rootRoute
         "/auth/signUp",
         "/category/$categoryId",
         "/portfolio/$portfolioId",
-        "/profile/add-award",
-        "/profile/add-portfolio",
         "/profile/edit",
         "/story/$storyId",
         "/admin/",
@@ -451,12 +405,6 @@ export const routeTree = rootRoute
     },
     "/portfolio/$portfolioId": {
       "filePath": "portfolio/$portfolioId.tsx"
-    },
-    "/profile/add-award": {
-      "filePath": "profile/add-award.tsx"
-    },
-    "/profile/add-portfolio": {
-      "filePath": "profile/add-portfolio.tsx"
     },
     "/profile/edit": {
       "filePath": "profile/edit.tsx"

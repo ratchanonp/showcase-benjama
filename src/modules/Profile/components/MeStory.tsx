@@ -28,7 +28,7 @@ export default function MeStory() {
   }
 
   return (
-    <div className="grid grid-cols-5 gap-4 pt-4">
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-4">
       {stories.map((story) => (
         <AuthStoryCard showCategory key={story.id} story={story} />
       ))}

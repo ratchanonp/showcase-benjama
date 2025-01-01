@@ -89,11 +89,6 @@ export function DesktopNav() {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-            <Link to="/portfolio">Portfolio</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
         <NavigationMenuItem className="mr-2">
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
             <Link to="/about">เกี่ยวกับ</Link>
@@ -206,11 +201,6 @@ export function MobileNav() {
               }}
             >
               ยอดนิยม
-            </Link>
-          </li>
-          <li>
-            <Link className=" hover:bg-neutral-100 w-full flex" to="/portfolio">
-              Portfolio
             </Link>
           </li>
           <li>

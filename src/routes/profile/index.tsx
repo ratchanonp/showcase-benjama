@@ -1,11 +1,8 @@
-import {
-  createFileRoute,
-  lazyRouteComponent,
-  redirect,
-} from "@tanstack/react-router";
+import ProfilePage from "@/modules/Profile/ProfilePage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/profile/")({
-  component: lazyRouteComponent(() => import("@/modules/Profile/ProfilePage")),
+  component: ProfilePage,
   beforeLoad: ({ context, location }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({

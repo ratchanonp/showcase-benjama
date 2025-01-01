@@ -20,7 +20,6 @@ import { Route as PopularIndexImport } from './routes/popular/index'
 import { Route as CategoryIndexImport } from './routes/category/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as StoryStoryIdImport } from './routes/story/$storyId'
-import { Route as ProfileEditImport } from './routes/profile/edit'
 import { Route as PortfolioPortfolioIdImport } from './routes/portfolio/$portfolioId'
 import { Route as CategoryCategoryIdImport } from './routes/category/$categoryId'
 import { Route as AuthSignUpImport } from './routes/auth/signUp'
@@ -78,12 +77,6 @@ const AdminIndexRoute = AdminIndexImport.update({
 const StoryStoryIdRoute = StoryStoryIdImport.update({
   id: '/story/$storyId',
   path: '/story/$storyId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileEditRoute = ProfileEditImport.update({
-  id: '/profile/edit',
-  path: '/profile/edit',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -163,13 +156,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioPortfolioIdImport
       parentRoute: typeof rootRoute
     }
-    '/profile/edit': {
-      id: '/profile/edit'
-      path: '/profile/edit'
-      fullPath: '/profile/edit'
-      preLoaderRoute: typeof ProfileEditImport
-      parentRoute: typeof rootRoute
-    }
     '/story/$storyId': {
       id: '/story/$storyId'
       path: '/story/$storyId'
@@ -231,7 +217,6 @@ export interface FileRoutesByFullPath {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin': typeof AdminIndexRoute
   '/category': typeof CategoryIndexRoute
@@ -248,7 +233,6 @@ export interface FileRoutesByTo {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin': typeof AdminIndexRoute
   '/category': typeof CategoryIndexRoute
@@ -266,7 +250,6 @@ export interface FileRoutesById {
   '/auth/signUp': typeof AuthSignUpRoute
   '/category/$categoryId': typeof CategoryCategoryIdRoute
   '/portfolio/$portfolioId': typeof PortfolioPortfolioIdRoute
-  '/profile/edit': typeof ProfileEditRoute
   '/story/$storyId': typeof StoryStoryIdRoute
   '/admin/': typeof AdminIndexRoute
   '/category/': typeof CategoryIndexRoute
@@ -285,7 +268,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/edit'
     | '/story/$storyId'
     | '/admin'
     | '/category'
@@ -301,7 +283,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/edit'
     | '/story/$storyId'
     | '/admin'
     | '/category'
@@ -317,7 +298,6 @@ export interface FileRouteTypes {
     | '/auth/signUp'
     | '/category/$categoryId'
     | '/portfolio/$portfolioId'
-    | '/profile/edit'
     | '/story/$storyId'
     | '/admin/'
     | '/category/'
@@ -335,7 +315,6 @@ export interface RootRouteChildren {
   AuthSignUpRoute: typeof AuthSignUpRoute
   CategoryCategoryIdRoute: typeof CategoryCategoryIdRoute
   PortfolioPortfolioIdRoute: typeof PortfolioPortfolioIdRoute
-  ProfileEditRoute: typeof ProfileEditRoute
   StoryStoryIdRoute: typeof StoryStoryIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
   CategoryIndexRoute: typeof CategoryIndexRoute
@@ -352,7 +331,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignUpRoute: AuthSignUpRoute,
   CategoryCategoryIdRoute: CategoryCategoryIdRoute,
   PortfolioPortfolioIdRoute: PortfolioPortfolioIdRoute,
-  ProfileEditRoute: ProfileEditRoute,
   StoryStoryIdRoute: StoryStoryIdRoute,
   AdminIndexRoute: AdminIndexRoute,
   CategoryIndexRoute: CategoryIndexRoute,
@@ -378,7 +356,6 @@ export const routeTree = rootRoute
         "/auth/signUp",
         "/category/$categoryId",
         "/portfolio/$portfolioId",
-        "/profile/edit",
         "/story/$storyId",
         "/admin/",
         "/category/",
@@ -405,9 +382,6 @@ export const routeTree = rootRoute
     },
     "/portfolio/$portfolioId": {
       "filePath": "portfolio/$portfolioId.tsx"
-    },
-    "/profile/edit": {
-      "filePath": "profile/edit.tsx"
     },
     "/story/$storyId": {
       "filePath": "story/$storyId.tsx"

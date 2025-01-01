@@ -15,7 +15,7 @@ export default function PopularByCategory() {
     getPopularStory({
       categoryId: rankingCategory !== "all" ? rankingCategory : undefined,
     });
-  }, [rankingCategory]);
+  }, [rankingCategory, getPopularStory]);
 
   return (
     <section>

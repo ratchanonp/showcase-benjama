@@ -105,9 +105,11 @@ export function DesktopNav() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-48">
-                  <DropdownMenuItem>
-                    <UserCircle2Icon className="w-6 h-6" />
-                    <Link to="/profile">โปรไฟล์</Link>
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">
+                      <UserCircle2Icon className="w-6 h-6" />
+                      โปรไฟล์
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleSignOut}>
                     <LogOutIcon className="w-6 h-6" />

@@ -8,12 +8,12 @@ export default function CategoryNav() {
 
   return (
     <header className="border-y sticky top-0 bg-white">
-      <nav className="max-w-screen-xl mx-auto flex space-x-4 px-8 ">
+      <nav className="max-w-screen-xl mx-auto flex space-x-4 px-4 overflow-x-auto">
         {categories.map((category) => (
           <Link
             to={`/category/${category.categoryId}`}
             key={category.categoryId}
-            className={`${activeCategory === category.categoryId ? "border-b-2 border-neutral-800 font-semibold" : " text-neutral-500"} flex h-full py-4`}
+            className={`${activeCategory === category.categoryId ? "border-b-2 border-neutral-800 font-semibold" : " text-neutral-500"} flex text-nowrap h-full py-4`}
           >
             {category.categoryName}
           </Link>

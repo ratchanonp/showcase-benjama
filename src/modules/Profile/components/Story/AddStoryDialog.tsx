@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { AddStoryDialogProvider } from "@/modules/Profile/components/Story/contexts/AddStoryDialogContext";
+import { AddStoryDialogContext } from "@/modules/Profile/components/Story/contexts/AddStoryDialogContext";
 import { useState } from "react";
 import AddStoryForm from "./AddStoryForm";
 
@@ -15,12 +15,12 @@ export default function AddStoryDialog() {
   const [open, setOpen] = useState(false);
 
   return (
-    <AddStoryDialogProvider value={{ open, setOpen }}>
+    <AddStoryDialogContext.Provider value={{ open, setOpen }}>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
           <Button>เพิ่มเรื่องราว</Button>
         </DialogTrigger>
-        <DialogContent className="overflow-y-scroll max-h-[calc(100vh-100px)]">
+        <DialogContent className="overflow-y-auto max-h-[calc(100vh-100px)]">
           <DialogHeader>
             <DialogTitle>เพิ่มเรื่องราว</DialogTitle>
             <DialogDescription>
@@ -30,6 +30,6 @@ export default function AddStoryDialog() {
           <AddStoryForm />
         </DialogContent>
       </Dialog>
-    </AddStoryDialogProvider>
+    </AddStoryDialogContext.Provider>
   );
 }

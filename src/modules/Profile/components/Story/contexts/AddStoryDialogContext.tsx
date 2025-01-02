@@ -7,5 +7,3 @@ export const AddStoryDialogContext = createContext<{
   open: false,
   setOpen: () => {},
 });
-
-export const AddStoryDialogProvider = AddStoryDialogContext.Provider;

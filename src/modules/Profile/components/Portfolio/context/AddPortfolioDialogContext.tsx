@@ -7,5 +7,3 @@ export const AddPortfolioDialogContext = createContext<{
   open: false,
   setOpen: () => {},
 });
-
-export const AddPortfolioDialogProvider = AddPortfolioDialogContext.Provider;

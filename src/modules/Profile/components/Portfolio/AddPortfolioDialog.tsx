@@ -9,18 +9,18 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import AddPortfolioForm from "./AddPortfolioForm";
-import { AddPortfolioDialogProvider } from "./context/AddPortfolioDialogContext";
+import { AddPortfolioDialogContext } from "./context/AddPortfolioDialogContext";
 
 export default function AddPortfolioDialog() {
   const [open, setOpen] = useState(false);
 
   return (
-    <AddPortfolioDialogProvider value={{ open, setOpen }}>
+    <AddPortfolioDialogContext.Provider value={{ open, setOpen }}>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
           <Button>เพิ่ม Portfolio </Button>
         </DialogTrigger>
-        <DialogContent className="overflow-y-scroll max-h-[calc(100vh-100px)]">
+        <DialogContent className="overflow-y-auto max-h-[calc(100vh-100px)]">
           <DialogHeader>
             <DialogTitle>เพิ่ม Portfolio </DialogTitle>
             <DialogDescription>
@@ -30,6 +30,6 @@ export default function AddPortfolioDialog() {
           <AddPortfolioForm />
         </DialogContent>
       </Dialog>
-    </AddPortfolioDialogProvider>
+    </AddPortfolioDialogContext.Provider>
   );
 }

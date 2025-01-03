@@ -12,6 +12,11 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthContext } from "@/contexts/AuthContext";
+import { AddStoryPayload } from "@/features/story/storyFirebase";
+import {
+  useAddStoryMutation,
+  useSetFeatureImageMutation,
+} from "@/features/story/storySlice";
 import { storage } from "@/lib/firebase";
 import { categories } from "@/modules/Category/components/CategoriesNav";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,11 +26,6 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { AddStoryPayload } from "../../../../features/story/storyFirebase";
-import {
-  useAddStoryMutation,
-  useSetFeatureImageMutation,
-} from "../../../../features/story/storySlice";
 import { AddStoryDialogContext } from "./contexts/AddStoryDialogContext";
 
 const addStoryFormSchema = z.object({

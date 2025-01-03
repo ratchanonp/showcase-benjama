@@ -8,7 +8,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { auth } from "@/lib/firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
@@ -91,15 +90,6 @@ export default function RegisterForm() {
 
   return (
     <div className="space-y-5">
-      <Button variant="outline" className="w-full">
-        Register with Google
-      </Button>
-      <div className="relative">
-        <Separator />
-        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 bg-white text-sm text-gray-500">
-          หรือ
-        </span>
-      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2.5">
           <FormField

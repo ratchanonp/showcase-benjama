@@ -8,7 +8,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { AuthContext } from "@/contexts/AuthContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getRouteApi, Link, useNavigate } from "@tanstack/react-router";
@@ -60,15 +59,6 @@ export default function LoginForm() {
 
   return (
     <div className="space-y-5">
-      <Button variant="outline" className="w-full">
-        Login with Google
-      </Button>
-      <div className="relative">
-        <Separator />
-        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 bg-white text-sm text-gray-500">
-          หรือ
-        </span>
-      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2.5">
           <FormField

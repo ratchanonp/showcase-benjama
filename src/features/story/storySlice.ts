@@ -4,6 +4,7 @@ import { FirebaseError } from "firebase/app";
 import {
   addStory,
   AddStoryPayload,
+  deleteStory,
   getPopularStory,
   getStories,
   getStoriesByCategory,
@@ -112,6 +113,17 @@ const storyApi = firebaseApi.injectEndpoints({
         }
       },
     }),
+    deleteStory: builder.mutation<void, string>({
+      async queryFn(arg) {
+        try {
+          await deleteStory(arg);
+          return { data: undefined };
+        } catch (error) {
+          return { error: error as FirebaseError };
+        }
+      },
+      invalidatesTags: ["Story"],
+    }),
   }),
 });
 
@@ -129,4 +141,5 @@ export const {
   useViewStoryMutation,
   useGetPopularStoryQuery,
   useLazyGetPopularStoryQuery,
+  useDeleteStoryMutation,
 } = storyApi;

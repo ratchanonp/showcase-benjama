@@ -3,6 +3,7 @@ import { db } from "@/lib/firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -145,4 +146,9 @@ export async function getPopularStory(top?: number, categoryId?: string) {
   });
 
   return stories;
+}
+
+export async function deleteStory(storyId: string) {
+  const docRef = doc(db, "stories", storyId);
+  await deleteDoc(docRef);
 }

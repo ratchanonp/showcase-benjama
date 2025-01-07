@@ -147,28 +147,30 @@ export default function AuthStoryCard(props: Props) {
             <TooltipContent>{isLiked ? "Unlike" : "Like"}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="destructive" size={"sm"} className="w-fit">
-              <Trash2Icon className="w-4 h-4" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-lg">
-            <Button
-              className="w-full"
-              variant="destructive"
-              onClick={handleDelete}
-              disabled={deleteLoading}
-            >
-              {deleteLoading ? "Deleting" : "Confirm"}
-            </Button>
-            <PopoverClose asChild>
-              <Button variant="ghost" className="w-full">
-                Cancel
+        {user && user.uid === story.authorId && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="destructive" size={"sm"} className="w-fit">
+                <Trash2Icon className="w-4 h-4" />
               </Button>
-            </PopoverClose>
-          </PopoverContent>
-        </Popover>
+            </PopoverTrigger>
+            <PopoverContent className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-lg">
+              <Button
+                className="w-full"
+                variant="destructive"
+                onClick={handleDelete}
+                disabled={deleteLoading}
+              >
+                {deleteLoading ? "Deleting" : "Confirm"}
+              </Button>
+              <PopoverClose asChild>
+                <Button variant="ghost" className="w-full">
+                  Cancel
+                </Button>
+              </PopoverClose>
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
     </div>
   );

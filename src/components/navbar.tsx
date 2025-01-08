@@ -213,11 +213,7 @@ export function MobileNav() {
               Portfolio
             </Link>
           </li>
-          <li>
-            <Link className=" hover:bg-neutral-100 w-full flex" to="/about">
-              เกี่ยวกับ
-            </Link>
-          </li>
+
         </ul>
         <DrawerFooter>
           {!isAuthenticated ? (

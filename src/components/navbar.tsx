@@ -94,11 +94,7 @@ export function DesktopNav() {
             <Link to="/portfolio">Portfolio</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="mr-2">
-          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-            <Link to="/about">เกี่ยวกับ</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        
         {isAuthenticated ? (
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -213,11 +209,7 @@ export function MobileNav() {
               Portfolio
             </Link>
           </li>
-          <li>
-            <Link className=" hover:bg-neutral-100 w-full flex" to="/about">
-              เกี่ยวกับ
-            </Link>
-          </li>
+
         </ul>
         <DrawerFooter>
           {!isAuthenticated ? (

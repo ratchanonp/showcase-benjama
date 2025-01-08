@@ -94,11 +94,7 @@ export function DesktopNav() {
             <Link to="/portfolio">Portfolio</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="mr-2">
-          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-            <Link to="/about">เกี่ยวกับ</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        
         {isAuthenticated ? (
           <NavigationMenuList>
             <NavigationMenuItem>
